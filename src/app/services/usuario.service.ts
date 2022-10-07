@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Usuario } from '../entities/usuario.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
 
-  url = 'https://localhost:44318/Usuario';
+  url = environment.url;
 
   constructor(private http: HttpClient) { }
 
@@ -22,7 +23,7 @@ export class UsuarioService {
   create(usuario: Usuario) {
     return this.http
       .post(
-        this.url,
+        this.url + '/Usuario',
         JSON.stringify(usuario),
         this.httpOptions
       )
@@ -32,7 +33,7 @@ export class UsuarioService {
   update(usuario: Usuario){
     return this.http
       .put(
-        this.url,
+        this.url + '/Usuario',
         JSON.stringify(usuario),
         this.httpOptions
       )
@@ -41,19 +42,19 @@ export class UsuarioService {
 
   delete(id: number) {
     return this.http
-      .delete(this.url + '/' + id, this.httpOptions)
+      .delete(this.url + '/Usuario/' + id, this.httpOptions)
       .pipe(retry(1), catchError(this.errorHandl));
   }
 
   getAll(): Observable<Usuario> {
     return this.http
-      .get<Usuario>(this.url)
+      .get<Usuario>(this.url + '/Usuario')
       .pipe(retry(1), catchError(this.errorHandl));
   }
 
   getById(id: number): Observable<Usuario> {
     return this.http
-      .get<Usuario>(this.url + '/' + id)
+      .get<Usuario>(this.url + '/Usuario/' + id)
       .pipe(retry(1), catchError(this.errorHandl));
   }
 
