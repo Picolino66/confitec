@@ -1,0 +1,61 @@
+<div class="grid-container">
+  <div fxLayout="row wrap" fxLayout.lt-md="column" fxFlexFill>
+    <div
+      fxFlex="32%" fxFlex.lt-md="90" class="w100 ml10 m15"
+      *ngFor="let user of this.usuarios; let i = index"
+    >
+    <mat-card>
+        <mat-card-header class="right mt-15">
+          <button mat-mini-fab color="basic" (click)="controleEdit(user.id)"><mat-icon>edit</mat-icon></button>
+          <button mat-mini-fab class="ml10" color="basic" (click)="deleteUsuario(user.id)"><mat-icon>delete</mat-icon></button>
+        </mat-card-header>
+
+        <mat-card-content *ngIf="user.id !== nEdit">
+          <p><b>Nome:</b> {{user.nome}}</p>
+          <p><b>Sobrenome: </b>{{user.sobrenome}}</p>
+          <p><b>Email: </b>{{user.sobrenome}}</p>
+          <p><b>Data Nascimento: </b>{{user.dataNascimento}}</p>
+          <p><b>Escolaridade: </b>{{escolaridades[user.escolaridade]}}</p>
+        </mat-card-content>
+
+        <mat-card-content *ngIf="user.id === nEdit">
+          <form class="form" #cadastroForm="ngForm">
+            <mat-form-field class="w100" appearance="fill">
+              <mat-label>Nome: </mat-label>
+              <input matInput placeholder="Isaías" [(ngModel)]="user.nome" name="nome" required minlength="3">
+            </mat-form-field>
+
+            <mat-form-field class="w100" appearance="fill">
+              <mat-label>Sobrenome:</mat-label>
+              <input matInput placeholder="Gonçalves Ribeiro" [(ngModel)]="user.sobrenome" name="sobrenome" required minlength="3">
+            </mat-form-field>
+
+            <mat-form-field class="w100" appearance="fill">
+              <mat-label>Email:</mat-label>
+              <input matInput type="email" placeholder="isaiasbd@hotmail.com" [(ngModel)]="user.email" name="email" required email minlength="3">
+            </mat-form-field>
+
+            <mat-form-field class="w100" appearance="fill">
+              <mat-label>Data Nascimento:</mat-label>
+              <input matInput type="date" [max]="maxDate" [(ngModel)]="user.dataNascimento" name="dataNascimento" required minlength="3">
+            </mat-form-field>
+
+            <mat-form-field class="w100" appearance="fill">
+              <mat-label>Escolaridade: </mat-label>
+              <mat-select [(ngModel)]="user.escolaridade" name="escolaridade" required>
+                <mat-option *ngFor="let esc of escolaridades; let i = index" [value]="i">
+                  {{esc}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <mat-card-actions>
+              <button mat-raised-button color="primary" (click)="updateUsuario(user)">Salvar</button>
+              <button mat-raised-button color="basic" (click)="controleEdit(-1)">Fechar</button>
+            </mat-card-actions>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

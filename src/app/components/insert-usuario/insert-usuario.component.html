@@ -1,0 +1,41 @@
+<div class="grid-container">
+  <mat-card>
+    <mat-card-content>
+      <form class="form" #cadastroForm="ngForm">
+        <mat-form-field class="w100" appearance="fill">
+          <mat-label>Nome: </mat-label>
+          <input matInput placeholder="Isaías" [(ngModel)]="usuario.nome" name="nome" required minlength="3">
+        </mat-form-field>
+
+        <mat-form-field class="w100" appearance="fill">
+          <mat-label>Sobrenome:</mat-label>
+          <input matInput placeholder="Gonçalves Ribeiro" [(ngModel)]="usuario.sobrenome" name="sobrenome" required minlength="3">
+        </mat-form-field>
+
+        <mat-form-field class="w100" appearance="fill">
+          <mat-label>Email:</mat-label>
+          <input matInput type="email" placeholder="isaiasbd@hotmail.com" [(ngModel)]="usuario.email" name="email" required email minlength="3">
+        </mat-form-field>
+
+        <mat-form-field class="w100" appearance="fill">
+          <mat-label>Data Nascimento:</mat-label>
+          <input matInput type="date" [max]="maxDate"  [(ngModel)]="usuario.dataNascimento" name="dataNascimento" required minlength="3">
+        </mat-form-field>
+
+        <mat-form-field class="w100" appearance="fill">
+          <mat-label>Escolaridade: </mat-label>
+          <mat-select [(ngModel)]="escolaridade" name="escolaridade" required>
+            <mat-option *ngFor="let esc of escolaridades; let i = index" [value]="i">
+              {{esc}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-card-actions>
+          <button mat-raised-button color="primary" (click)="salvar()" [disabled]="cadastroForm.invalid">Salvar</button>
+        </mat-card-actions>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

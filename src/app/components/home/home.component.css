@@ -1,0 +1,23 @@
+.grid-container {
+  margin: 10px;
+}
+
+.ml10 {
+  margin-left: 10px;
+}
+
+.mt-10 {
+  margin-top: -10px !important;
+}
+
+.m15 {
+  margin-top: 15px !important;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.right {
+  float: right;
+}
